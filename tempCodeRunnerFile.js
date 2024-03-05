@@ -1,0 +1,2 @@
+
+    const totalSales = lockQty * l
