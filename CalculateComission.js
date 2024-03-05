@@ -14,10 +14,15 @@ function calculateCommissionFunction(lockQty, stockQty, barrelQty) {
     const totalSales = lockQty * lockCost + stockQty * stockCost + barrelQty * barrelCost;
 
     // Check if sales exceed any limits
-    if (lockQty > maxLocks && stockQty > maxStocks && barrelQty > maxBarrels) {
+    if (lockQty > maxLocks || stockQty > maxStocks || barrelQty > maxBarrels) {
         return "Sales quantities exceed maximum limits.";
     }
-
+    else if (lockQty < 1 || stockQty < 1 || barrelQty < 1) {
+        return "Err Msg: Invalid Input";
+    }
+    else if ( isNaN(lockQty)  || isNaN(stockQty) || isNaN(barrelQty) ) {
+        return "Err Msg: Invalid Input";
+    }
     // Commission rates
     let commissionRate;
     if (totalSales <= 1000) {
@@ -32,7 +37,7 @@ function calculateCommissionFunction(lockQty, stockQty, barrelQty) {
     let commission = totalSales * commissionRate;
 
     // Subtract commission for 1 lock
-    commission -= lockCost * commissionRate;
+    commission -= 4.5;
 
     return [totalSales,commission];
 }
